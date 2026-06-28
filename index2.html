@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    
+    <style>
+        /* =========================================
+           1. การตั้งค่าพื้นฐาน และ ภาพพื้นหลัง
+        ========================================= */
+        html {
+            /* โค้ดนี้ทำให้เวลาคลิกเมนู หน้าจอจะเลื่อนอย่างนุ่มนวล */
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+            
+            /* เปลี่ยน URL ด้านล่างนี้เป็นรูปลิงก์ที่คุณต้องการ */
+            background-image: url('wallpaper2.png'); 
+            background-size: cover; /* ขยายภาพให้พอดีหน้าจอ */
+            background-position: center;
+            background-attachment: fixed; /* 1.1 ภาพอยู่กับที่ ไม่เลื่อนตามเมาส์ */
+            
+            color: #ffffff; /* สีตัวอักษรเริ่มต้นเป็นสีขาว */
+        }
+
+        /* =========================================
+           2. เมนูบาร์กระจก (Glassmorphism Navbar)
+        ========================================= */
+        .glass-nav {
+            position: fixed; /* 8. เมนูจะยึดติดอยู่ด้านบนเสมอ */
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1); /* สีขาวที่มีความโปร่งใส 10% */
+            backdrop-filter: blur(10px); /* 2.1 ทำให้เบลอเหมือนกล่องแก้ว (Frosted Glass) */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000; /* กำหนดให้อยู่บนสุดเสมอ (ไม่โดนกล่องข้อความบัง) */
+        }
+
+        .glass-nav ul {
+            display: flex;
+            justify-content: center; /* จัดเมนูให้อยู่กึ่งกลาง */
+            list-style-type: none; /* เอาจุดไข่ปลาหน้าเมนูออก */
+            margin: 0;
+            padding: 15px 0;
+        }
+
+        .glass-nav li {
+            margin: 0 20px;
+        }
+
+        .glass-nav a {
+            color: white;
+            text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: 0.3s;
+        }
+
+        .glass-nav a:hover {
+            color: #f0a500; /* เปลี่ยนเป็นสีเหลืองส้มเมื่อเอาเมาส์ชี้ */
+        }
+
+        /* =========================================
+           3. การตั้งค่าหน้าแต่ละส่วน (Sections)
+        ========================================= */
+        .fullscreen-section {
+            /* 3.1 ขยายส่วนนี้ให้สูงเท่ากับหน้าจอ (100 Viewport Height) */
+            min-height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px 20px; /* เว้นที่ด้านบน 80px กันเมนูบาร์บังเนื้อหา */
+            box-sizing: border-box;
+        }
+
+        /* 3.2 กล่องข้อความสีดำเทาโปร่งใส */
+        .content-box {
+            width: 85%;
+            max-width: 1000px;
+            background: rgba(30, 30, 30, 0.8); /* สีดำออกเทา ความโปร่งใส 80% */
+            backdrop-filter: blur(8px); /* ให้แสงพื้นหลังทะลุมาแบบเบลอๆ */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7); /* ขอบเงากล่องข้อความ */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; /* มุมกล่องโค้งมน */
+            padding: 40px;
+            text-align: left;
+        }
+
+        /* การจัดหน้าโปรไฟล์: ซ้ายรูป ขวาข้อความ */
+        .profile-layout {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .profile-img img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%; /* ทำรูปให้เป็นวงกลม */
+            object-fit: cover; /* ครอบตัดรูปให้เต็มกรอบ */
+            object-position: top;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* กรอบรูป */
+            box-shadow: 0 4px 50px rgba(162, 232, 232, 0.8); /* เงารอบรูป */
+        }
+
+        .profile-text {
+            flex: 1; /* ให้ข้อความใช้พื้นที่ที่เหลือทั้งหมด */
+        }
+
+        /* 3.3 ปุ่มถัดไป */
+        .next-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #f0a500; /* สีพื้นหลังปุ่ม */
+            color: #000; /* สีตัวอักษรปุ่ม */
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .next-btn:hover {
+            background: #ffc13b;
+            transform: scale(1.05); /* ขยายปุ่มเล็กน้อยเมื่อชี้ */
+        }
+
+        /* พื้นที่ Google Maps */
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* =========================================
+           การปรับให้รองรับโทรศัพท์มือถือ (Responsive)
+        ========================================= */
+        @media (max-width: 768px) {
+            .profile-layout {
+                flex-direction: column; /* ถ้าจอมือถือ ให้รูปและข้อความเรียงแนวตั้ง */
+                text-align: center;
+            }
+            .glass-nav ul {
+                flex-wrap: wrap; /* เมนูบาร์สามารถปัดขึ้นบรรทัดใหม่ได้ถ้าจอแคบ */
+            }
+            .glass-nav li {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <ul>
+            <li><a href="#about">รู้จักผม</a></li>
+            <li><a href="#mission">ภารกิจ</a></li>
+            <li><a href="#portfolio">ผลงานที่ชอบ</a></li>
+            <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="fullscreen-section">
+        <div class="content-box">
+            <div class="profile-layout">
+                <div class="profile-img">
+                    <img src="profile.jpg" alt="รูปโปรไฟล์">
+                </div>
+                <div class="profile-text">
+                    <h2>Chutipun.H</h2>
+                    <p><br>นายชุติพันธุ์ หอมสะอาด 
+            <br>สังกัด แผนกบริหารการขายลูกค้าธุรกิจระดับประเทศ 
+            <br>กองบริหารการขายลูกค้าธุรกิจระดับประเทศ 
+            <br>ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด </p>
+                    
+                    <a href="#mission" class="next-btn">ถัดไป ⬇️</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="fullscreen-section">
+        <div class="content-box">
+            <h2>ภารกิจ</h2>
+            <p>.กลับมาใส่ตรงนี้ด้วย ตอนนี้ยังนึกไม่ออก</p>
+            <ul>
+                <li>ทำ Data Cleaning จากไฟล์ Excel </li>
+                <li>วิเคราะห์และสร้างแดชบอร์ด</li>
+                <li>จับฉ่าย</li>
+            </ul>
+            <a href="#portfolio" class="next-btn">ถัดไป ⬇️</a>
+        </div>
+    </section>
+
+    <section id="portfolio" class="fullscreen-section">
+        <div class="content-box">
+            <h2>ผลงานที่ชอบ</h2>
+            <p>ระบบจัดการการใช้งานรถยนต์ กฟภ. โดยมีทั้งระบบการจองรถยนต์ การรายงานชาร์จรถยนต์ ระบบ Code Grab for Bussiness รวมถึงการสรุปรายงาน ปัจจุบันใช้งานจริงใน ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด</p>
+            
+            <div id="appscript-container" style="min-height: 400px; width: 100%; overflow: hidden;">
+                <iframe src="https://script.google.com/macros/s/AKfycbzdi-IPmmqINMKI7rW_itU8d0St45K8Do1OIdB4zzw-sYpHtZDvkZAqIsjd_NdYrfkB/exec" style="width: 100%; height: 500px; border: none; border-radius: 10px;"></iframe>
+            </div>
+            
+            <a href="#contact" class="next-btn">ถัดไป ⬇️</a>
+        </div>
+    </section>
+
+    <section id="contact" class="fullscreen-section">
+        <div class="content-box">
+            <h2>ติดต่อ</h2>
+            <p><strong>Line ID:</strong> @nutcats</p>
+            <p><strong>เบอร์โทรศัพท์:</strong> 088-166-8046</p>
+            
+            <div class="map-container">
+                <iframe src="https://maps.app.goo.gl/kiRKbUvJ5zBLgu3p6" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <a href="#about" class="next-btn">กลับไปด้านบน ⬆️</a>
+        </div>
+    </section>
+
+</body>
+</html>
