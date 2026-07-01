@@ -6,44 +6,46 @@
     <title>My Portfolio</title>
     
     <style>
-        /* =========================================
-           1. การตั้งค่าพื้นฐาน และ ภาพพื้นหลัง
-        ========================================= */
         html {
-            /* โค้ดนี้ทำให้เวลาคลิกเมนู หน้าจอจะเลื่อนอย่างนุ่มนวล */
             scroll-behavior: smooth; 
         }
 
         body {
             margin: 0;
             font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
-            
-            /* เปลี่ยน URL ด้านล่างนี้เป็นรูปลิงก์ที่คุณต้องการ */
             background-image: url('wallpaper2.png'); 
-            background-size: cover; /* ขยายภาพให้พอดีหน้าจอ */
+            background-size: cover; 
             background-position: center;
-            background-attachment: fixed; /* 1.1 ภาพอยู่กับที่ ไม่เลื่อนตามเมาส์ */
-            
-            color: #ffffff; /* สีตัวอักษรเริ่มต้นเป็นสีขาว */
+            background-attachment: fixed; 
+            color: #ffffff; 
         }
 
-        /* =========================================
-           2. เมนูบาร์กระจก (Glassmorphism Navbar)
-        ========================================= */
+        .content-box h2 {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content-box p {
+            font-size: 26px;
+            text-align: center;
+            margin: 20px;
+        }
+
         .glass-nav {
-            position: fixed; /* 8. เมนูจะยึดติดอยู่ด้านบนเสมอ */
+            position: fixed; 
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.1); /* สีขาวที่มีความโปร่งใส 10% */
-            backdrop-filter: blur(10px); /* 2.1 ทำให้เบลอเหมือนกล่องแก้ว (Frosted Glass) */
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            z-index: 1000; /* กำหนดให้อยู่บนสุดเสมอ (ไม่โดนกล่องข้อความบัง) */
+            z-index: 1000; 
         }
 
         .glass-nav ul {
             display: flex;
-            justify-content: center; /* จัดเมนูให้อยู่กึ่งกลาง */
-            list-style-type: none; /* เอาจุดไข่ปลาหน้าเมนูออก */
+            justify-content: center; 
+            list-style-type: none; 
             margin: 0;
             padding: 15px 0;
         }
@@ -54,43 +56,41 @@
 
         .glass-nav a {
             color: white;
-            text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+            text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
             transition: 0.3s;
         }
 
         .glass-nav a:hover {
-            color: #f0a500; /* เปลี่ยนเป็นสีเหลืองส้มเมื่อเอาเมาส์ชี้ */
+            color: #81dafd; 
         }
 
-        /* =========================================
-           3. การตั้งค่าหน้าแต่ละส่วน (Sections)
-        ========================================= */
+        
         .fullscreen-section {
-            /* 3.1 ขยายส่วนนี้ให้สูงเท่ากับหน้าจอ (100 Viewport Height) */
+         
             min-height: 100vh; 
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px 20px; /* เว้นที่ด้านบน 80px กันเมนูบาร์บังเนื้อหา */
+            padding: 80px 20px 20px; 
             box-sizing: border-box;
         }
 
-        /* 3.2 กล่องข้อความสีดำเทาโปร่งใส */
+     
         .content-box {
             width: 85%;
             max-width: 1000px;
-            background: rgba(30, 30, 30, 0.8); /* สีดำออกเทา ความโปร่งใส 80% */
-            backdrop-filter: blur(8px); /* ให้แสงพื้นหลังทะลุมาแบบเบลอๆ */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7); /* ขอบเงากล่องข้อความ */
+            background: rgba(30, 30, 30, 0.8); 
+            backdrop-filter: blur(8px); 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; /* มุมกล่องโค้งมน */
+            border-radius: 20px; 
             padding: 40px;
             text-align: left;
         }
 
-        /* การจัดหน้าโปรไฟล์: ซ้ายรูป ขวาข้อความ */
+      
         .profile-layout {
             display: flex;
             gap: 40px;
@@ -100,24 +100,31 @@
         .profile-img img {
             width: 250px;
             height: 250px;
-            border-radius: 50%; /* ทำรูปให้เป็นวงกลม */
-            object-fit: cover; /* ครอบตัดรูปให้เต็มกรอบ */
+            border-radius: 50%; 
+            object-fit: cover; 
             object-position: top;
-            border: 1px solid rgba(255, 255, 255, 0.3); /* กรอบรูป */
-            box-shadow: 0 4px 50px rgba(162, 232, 232, 0.8); /* เงารอบรูป */
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 4px 50px rgba(162, 232, 232, 0.8); 
         }
 
         .profile-text {
-            flex: 1; /* ให้ข้อความใช้พื้นที่ที่เหลือทั้งหมด */
+            flex: 1; 
         }
 
-        /* 3.3 ปุ่มถัดไป */
+        .btn-container {
+            display: flex;
+            justify-content: flex-end; 
+            margin-top: 25px; 
+            width: 100%;
+        }     
+
+     
         .next-btn {
             display: inline-block;
             margin-top: 25px;
             padding: 12px 25px;
-            background: #f0a500; /* สีพื้นหลังปุ่ม */
-            color: #000; /* สีตัวอักษรปุ่ม */
+            background: #ffffff; 
+            color: #000000; 
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
@@ -125,8 +132,8 @@
         }
 
         .next-btn:hover {
-            background: #ffc13b;
-            transform: scale(1.05); /* ขยายปุ่มเล็กน้อยเมื่อชี้ */
+            background: #81dafd;
+            transform: scale(1.05); 
         }
 
         /* พื้นที่ Google Maps */
@@ -138,21 +145,29 @@
             margin-top: 15px;
         }
 
-        /* =========================================
-           การปรับให้รองรับโทรศัพท์มือถือ (Responsive)
-        ========================================= */
+  
         @media (max-width: 768px) {
             .profile-layout {
-                flex-direction: column; /* ถ้าจอมือถือ ให้รูปและข้อความเรียงแนวตั้ง */
+                flex-direction: column; 
                 text-align: center;
             }
             .glass-nav ul {
-                flex-wrap: wrap; /* เมนูบาร์สามารถปัดขึ้นบรรทัดใหม่ได้ถ้าจอแคบ */
+                flex-wrap: wrap; 
             }
             .glass-nav li {
                 margin: 5px 10px;
             }
         }
+
+        
+        #cursor {
+            animation: blink 1s infinite; 
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0; } 
+        }
+
     </style>
 </head>
 <body>
@@ -174,12 +189,19 @@
                 </div>
                 <div class="profile-text">
                     <h2>Chutipun.H</h2>
-                    <p><br>นายชุติพันธุ์ หอมสะอาด 
-            <br>สังกัด แผนกบริหารการขายลูกค้าธุรกิจระดับประเทศ 
-            <br>กองบริหารการขายลูกค้าธุรกิจระดับประเทศ 
-            <br>ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด </p>
+                    <p style="text-align: center; color: #f0a500; font-weight: bold; font-size: 22px;">
+                        <span id="typing-text"></span><span id="cursor">|</span>
+                    </p>
+                    <p>     
+                        <br>นายชุติพันธุ์ หอมสะอาด 
+                        <br>สังกัด แผนกบริหารการขายลูกค้าธุรกิจระดับประเทศ 
+                        <br>กองบริหารการขายลูกค้าธุรกิจระดับประเทศ 
+                        <br>ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด 
+                    </p>
                     
-                    <a href="#mission" class="next-btn">ถัดไป ⬇️</a>
+                    <div class="btn-container">
+                        <a href="#mission" class="next-btn">ถัดไป ⬇️</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,26 +210,37 @@
     <section id="mission" class="fullscreen-section">
         <div class="content-box">
             <h2>ภารกิจ</h2>
-            <p>.กลับมาใส่ตรงนี้ด้วย ตอนนี้ยังนึกไม่ออก</p>
+            <p>
+                <br>ชายที่ได้รับภารกิจจากกาแลคซี่ทางแมวเผือก มาจัดการพลังงานบนโลก 
+                <br>เพื่อให้มีพลังงานสะอาดและยั่งยืน ทำให้โลกนี้น่าอยู่ขึ้น
+            </p>
             <ul>
                 <li>ทำ Data Cleaning จากไฟล์ Excel </li>
-                <li>วิเคราะห์และสร้างแดชบอร์ด</li>
-                <li>จับฉ่าย</li>
+                <li>วิเคราะห์ Load Profile ลูกค้ารายใหญ่</li>
+                <li>ดำเนินงานโครงการจัดการพลังงานด้วยระบบดิจิทัล</li>
+                <li>งานอื่น ๆ ที่ได้รับมอบหมาย</li>
             </ul>
-            <a href="#portfolio" class="next-btn">ถัดไป ⬇️</a>
+            <div class="btn-container">
+                <a href="#portfolio" class="next-btn">ถัดไป ⬇️</a>
+            </div>
         </div>
     </section>
 
     <section id="portfolio" class="fullscreen-section">
         <div class="content-box">
             <h2>ผลงานที่ชอบ</h2>
-            <p>ระบบจัดการการใช้งานรถยนต์ กฟภ. โดยมีทั้งระบบการจองรถยนต์ การรายงานชาร์จรถยนต์ ระบบ Code Grab for Bussiness รวมถึงการสรุปรายงาน ปัจจุบันใช้งานจริงใน ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด</p>
+            <p>
+                <br>ระบบจัดการการใช้งานรถยนต์ กฟภ. โดยมีทั้งระบบการจองรถยนต์ การรายงานชาร์จรถยนต์ ระบบ Code Grab for Bussiness รวมถึงการสรุปรายงาน  
+                <br>ปัจจุบันใช้งานจริงใน ฝ่ายลูกค้าสัมพันธ์ สายงานธุรกิจและการตลาด
+            </p>
             
             <div id="appscript-container" style="min-height: 400px; width: 100%; overflow: hidden;">
                 <iframe src="https://script.google.com/macros/s/AKfycbzdi-IPmmqINMKI7rW_itU8d0St45K8Do1OIdB4zzw-sYpHtZDvkZAqIsjd_NdYrfkB/exec" style="width: 100%; height: 500px; border: none; border-radius: 10px;"></iframe>
             </div>
             
-            <a href="#contact" class="next-btn">ถัดไป ⬇️</a>
+            <div class="btn-container">
+                <a href="#contact" class="next-btn">ถัดไป ⬇️</a>
+            </div>
         </div>
     </section>
 
@@ -218,12 +251,32 @@
             <p><strong>เบอร์โทรศัพท์:</strong> 088-166-8046</p>
             
             <div class="map-container">
-                <iframe src="https://maps.app.goo.gl/kiRKbUvJ5zBLgu3p6" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d968.4529701493585!2d100.55719077587128!3d13.850327915743815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29cc18727fbc5%3A0x4b08b94ce559e647!2zMTA5IOC4luC4meC4mSDguIfguLLguKHguKfguIfguKjguYzguKfguLLguJkg4LmB4LiC4Lin4LiH4Lil4Liy4LiU4Lii4Liy4LinIOC5gOC4guC4leC4iOC4leC4uOC4iOC4seC4geC4oyDguIHguKPguLjguIfguYDguJfguJ7guKHguKvguLLguJnguITguKMgMTA5MDA!5e0!3m2!1sth!2sth!4v1782724791440!5m2!1sth!2sth" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
             
-            <a href="#about" class="next-btn">กลับไปด้านบน ⬆️</a>
+            <div class="btn-container">
+                <a href="#about" class="next-btn">กลับไปด้านบน ⬆️</a>
+            </div>
         </div>
     </section>
+<script>
+        const myText = "ยินดีต้อนรับครับ :)"; 
+        let index = 0; 
+        function typeWriter() {
+         
+            if (index < myText.length) {
+                document.getElementById("typing-text").innerHTML += myText.charAt(index);
+                index++; 
+                setTimeout(typeWriter, 100); 
+            }
+        }
 
+    
+        window.onload = function() {
+            setTimeout(typeWriter, 500); 
+        };
+    </script>
+</body>
+</html>
 </body>
 </html>
